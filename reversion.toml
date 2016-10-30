@@ -1,0 +1,9 @@
+currentversion = '0.1'
+
+[[place]]
+file = "conf.py"
+line-regex = 'version'
+
+[[place]]
+file = "conf.py"
+line-regex = 'release'
