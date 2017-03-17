@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 1
 
    coreutils/index
+   windows/index
 
 
 
