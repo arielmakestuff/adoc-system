@@ -1,6 +1,10 @@
 Installed packages
 ==================
 
+* vim
+
+* btrfs-progs
+
 * sway
 
 * xorg-xrandr
@@ -12,3 +16,17 @@ Installed packages
 * python
 
 * openssh
+
+* etckeeper
+
+* neovim
+
+* zsh
+
+* zsh-completions
+
+* bash-completion
+
+* ufw
+
+* base-devel
