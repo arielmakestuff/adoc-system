@@ -10,3 +10,5 @@ Installed packages
 * fortune-mod
 
 * python
+
+* openssh
