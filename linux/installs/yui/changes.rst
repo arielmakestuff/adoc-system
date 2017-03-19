@@ -1,6 +1,15 @@
 Changes
 =======
 
+Locale
+-------
+
+* setup system locale by running the following:
+
+  .. code-block:: bash
+
+     # localectl set-locale LANG=en_CA.UTF-8
+
 Networking
 -----------
 
@@ -31,6 +40,49 @@ systemd-networkd
   .. code-block:: bash
 
      # ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
+
+Normal user
+-----------
+
+Ran the following command:
+
+.. code-block:: bash
+
+   # useradd -m -s /bin/bash smokybobo
+
+
+Home directory
+--------------
+
+python dev setup
+~~~~~~~~~~~~~~~~~
+
+* created the following directories:
+
+  1. `~/.local/share/python-venv`
+
+  2. `~/.local/stow`
+
+  3. `~/.local/bin`
+
+* installed stow package
+
+* ran the following commands:
+
+  .. code-block:: bash
+
+     # cd ~/.local/share/python-venv
+     # python -m venv python3.6
+     # python3.6/bin/pip install virtualenvwrapper
+     # ln -s ~/.local/share/python-venv/python3.6/bin/virtualenvwrapper.sh ~/.local/bin
+     # cd ~/.local/bin
+     # cat <<EOF > pyenv.sh
+     > #!/bin/sh
+     > #
+     > # pyenv.sh
+     > exec python3.6 -m venv \$@
+     > EOF
+     # chmod +x pyenv.sh
 
 zsh setup
 ~~~~~~~~~~
@@ -78,6 +130,12 @@ zsh setup
   .. code-block:: bash
 
      # zsh
+
+* exited `zsh` and ran the following command to change the shell:
+
+  .. code-block:: bash
+
+     # chsh -s /bin/zsh
 
 
 Todo
