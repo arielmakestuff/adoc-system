@@ -41,6 +41,19 @@ systemd-networkd
 
      # ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 
+sudo
+----
+
+Switch to the root account and create a new file in `/etc/sudoers.d`:
+
+.. code-block:: bash
+
+   % su
+   Password:
+   # visudo -f /etc/sudoers.d/local
+
+
+
 Normal user
 -----------
 
