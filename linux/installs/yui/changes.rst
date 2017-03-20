@@ -447,3 +447,8 @@ Todo
 
 * Disabled `pam_securetty` module by commenting out the corresponding line in
   `/etc/pam.d/login`
+
+
+* instructions on installing `cower` and `pacaur` from the AUR
+
+* zsh start and shutdown file order
