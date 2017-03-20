@@ -175,6 +175,12 @@ Create the following directories:
 
 13. `~/.config/systemd/user`
 
+14. `~/media`
+
+15. `~/media/music`
+
+16. `~/.config/alsa`
+
 
 ssh
 ~~~
@@ -269,29 +275,38 @@ python dev setup
 zsh setup
 ~~~~~~~~~~
 
+* assumes ssh setup and user's ssh public key is on github already
+
 * cloned `https://github.com/arielmakestuff/zshconfig`_ to
-  `~/.local/src/zshconfig`
-
-* cloned `~/.local/src/zshconfig` to `~/.config/zsh`
-
-* created `~/.config/zsh/lib`
-
-* ran the following command:
+  bare repo `~/.local/src/zshconfig.git`:
 
   .. code-block:: bash
 
-     # export ZPLUG_HOME=~/.config/zsh/lib/zplug
+     $ cd ~/.local/src
+     $ git clone --bare git@github.com:arielmakestuff/zshconfig
 
-* cloned `https://github.com/zplug/zplug`_ to `~/.config/zsh/lib/zplug`
-
-* ran the following commands:
+* made sure to switch default branch to develop:
 
   .. code-block:: bash
 
-     # cd ~/.config/zsh
-     # ln -s $(pwd)/zprofile ~/.zprofile
-     # ln -s $(pwd)/zshenv ~/.zshenv
-     # ln -s $(pwd)/zshrc ~/.zshrc
+     $ cd ~/.local/src/zshconfig.git
+     $ git symbolic-ref HEAD refs/heads/develop
+
+* cloned `~/.local/src/zshconfig` to `~/.config/zsh`:
+
+  .. code-block:: bash
+
+     $ git clone ~/.local/src/zshconfig ~/.config/zsh
+
+* ran zplug install and installed zsh config files
+
+  .. code-block:: bash
+
+     $ cd ~/.config/zsh
+     $ bin/install  # zplug install
+     $ ln -s $(pwd)/zprofile ~/.zprofile
+     $ ln -s $(pwd)/zshenv ~/.zshenv
+     $ ln -s $(pwd)/zshrc ~/.zshrc
 
 * ran `zsh` and answered `y` when asked if want to install plugins:
 
@@ -304,6 +319,119 @@ zsh setup
   .. code-block:: bash
 
      # chsh -s /bin/zsh
+
+
+Sound
+~~~~~
+
+With many different sound devices, need to configure the default. Note: the
+`alsa-utils` package needs to be installed.
+
+To see a list of sound card devices:
+
+.. code-block:: bash
+
+   $ aplay -l
+   **** List of PLAYBACK Hardware Devices ****
+   card 0: Intel [HDA Intel], device 0: ALC889A Analog [ALC889A Analog]
+     Subdevices: 1/1
+     Subdevice #0: subdevice #0
+   card 0: Intel [HDA Intel], device 1: ALC889A Digital [ALC889A Digital]
+     Subdevices: 1/1
+     Subdevice #0: subdevice #0
+   card 1: HDMI [HDA ATI HDMI], device 3: HDMI 0 [HDMI 0]
+     Subdevices: 1/1
+     Subdevice #0: subdevice #0
+   card 1: HDMI [HDA ATI HDMI], device 7: HDMI 1 [HDMI 1]
+     Subdevices: 1/1
+     Subdevice #0: subdevice #0
+   card 1: HDMI [HDA ATI HDMI], device 8: HDMI 2 [HDMI 2]
+     Subdevices: 1/1
+     Subdevice #0: subdevice #0
+   card 1: HDMI [HDA ATI HDMI], device 9: HDMI 3 [HDMI 3]
+     Subdevices: 1/1
+     Subdevice #0: subdevice #0
+   card 1: HDMI [HDA ATI HDMI], device 10: HDMI 4 [HDMI 4]
+     Subdevices: 1/1
+     Subdevice #0: subdevice #0
+   card 1: HDMI [HDA ATI HDMI], device 11: HDMI 5 [HDMI 5]
+     Subdevices: 1/1
+     Subdevice #0: subdevice #0
+
+To get a list of PCMs:
+
+.. code-block:: bash
+
+   $ aplay -L | grep :CARD
+   sysdefault:CARD=Intel
+   front:CARD=Intel,DEV=0
+   surround21:CARD=Intel,DEV=0
+   surround40:CARD=Intel,DEV=0
+   surround41:CARD=Intel,DEV=0
+   surround50:CARD=Intel,DEV=0
+   surround51:CARD=Intel,DEV=0
+   surround71:CARD=Intel,DEV=0
+   iec958:CARD=Intel,DEV=0
+   dmix:CARD=Intel,DEV=0
+   dmix:CARD=Intel,DEV=1
+   dsnoop:CARD=Intel,DEV=0
+   dsnoop:CARD=Intel,DEV=1
+   hw:CARD=Intel,DEV=0
+   hw:CARD=Intel,DEV=1
+   plughw:CARD=Intel,DEV=0
+   plughw:CARD=Intel,DEV=1
+   hdmi:CARD=HDMI,DEV=0
+   hdmi:CARD=HDMI,DEV=1
+   hdmi:CARD=HDMI,DEV=2
+   hdmi:CARD=HDMI,DEV=3
+   hdmi:CARD=HDMI,DEV=4
+   hdmi:CARD=HDMI,DEV=5
+   dmix:CARD=HDMI,DEV=3
+   dmix:CARD=HDMI,DEV=7
+   dmix:CARD=HDMI,DEV=8
+   dmix:CARD=HDMI,DEV=9
+   dmix:CARD=HDMI,DEV=10
+   dmix:CARD=HDMI,DEV=11
+   dsnoop:CARD=HDMI,DEV=3
+   dsnoop:CARD=HDMI,DEV=7
+   dsnoop:CARD=HDMI,DEV=8
+   dsnoop:CARD=HDMI,DEV=9
+   dsnoop:CARD=HDMI,DEV=10
+   dsnoop:CARD=HDMI,DEV=11
+   hw:CARD=HDMI,DEV=3
+   hw:CARD=HDMI,DEV=7
+   hw:CARD=HDMI,DEV=8
+   hw:CARD=HDMI,DEV=9
+   hw:CARD=HDMI,DEV=10
+   hw:CARD=HDMI,DEV=11
+   plughw:CARD=HDMI,DEV=3
+   plughw:CARD=HDMI,DEV=7
+   plughw:CARD=HDMI,DEV=8
+   plughw:CARD=HDMI,DEV=9
+   plughw:CARD=HDMI,DEV=10
+   plughw:CARD=HDMI,DEV=11
+
+
+To set the default card to the HDA Intel, create `~/.config/alsa/asoundrc`
+with the following contents::
+
+    # Set default device and control (see aplay -l output)
+    defaults.ctl.card 0
+    defaults.pcm.card 0
+    defaults.pcm.device 0
+
+Finally, symlink the config to `$HOME`:
+
+.. code-block:: bash
+
+   $ ln -s ~/.config/alsa/asoundrc ~/.asoundrc
+
+To test the configuration, log out and log back in, and then run the following
+command. White noise should be heard:
+
+.. code-block:: bash
+
+   $ speaker-test -c 2
 
 
 Todo
