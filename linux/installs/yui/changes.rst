@@ -71,10 +71,14 @@ Run the following command to add normal user and the admin user:
 
 .. code-block:: bash
 
-   # for u in smokybobo admin ; do useradd -m -s /bin/bash $u ; done
+   # for u in smokybobo admin cfgman pkgman ; do useradd -m -s /bin/bash $u ; done
 
 The admin user account will be used for `journalctl`, `systemctl`, `mount`,
 `kill`, and `iptables`.
+
+The `cfgman` user will be used to edit files in `/etc`.
+
+The `pkgman` user will be used to install packages via `pacman`.
 
 sudo
 ----
@@ -155,17 +159,17 @@ Create the following directories:
 
 3. `~/.local/bin`
 
-4. `~/.config`
+4. `~/.local/share`
 
-5. `~/.cache`
+5. `~/.local/stow`
 
-6. `~/.local/share`
+6. `~/.local/src`
 
-7. `~/.local/stow`
+7. `~/.config`
 
-8. `~/.local/src`
+8. `~/src`
 
-9. `~/src`
+9. `~/.cache`
 
 10. `~/.cache/archbuild`
 
@@ -452,3 +456,5 @@ Todo
 * instructions on installing `cower` and `pacaur` from the AUR
 
 * zsh start and shutdown file order
+
+* contents of `/etc/sudoers.d/local` file

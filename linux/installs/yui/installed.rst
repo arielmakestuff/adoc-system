@@ -30,3 +30,7 @@ Installed packages
 * ufw
 
 * base-devel
+
+* alsa-utils
+
+* mpg123
