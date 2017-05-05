@@ -458,3 +458,5 @@ Todo
 * zsh start and shutdown file order
 
 * contents of `/etc/sudoers.d/local` file
+
+* makepkg.conf: set to -j16 for ryzen R7 machine

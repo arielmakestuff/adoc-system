@@ -103,6 +103,7 @@ Installed packages
 
 * nfs-utils
 
+
 Fonts
 -----
 
@@ -131,3 +132,15 @@ ttf-hanazono
 ttf-liberation
 
 ttf-ms-fonts (AUR)
+
+
+Additional Packages
+-------------------
+
+* tmux
+
+* neovim-qt
+
+* xsel
+
+* ctags
