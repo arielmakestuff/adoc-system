@@ -55,7 +55,7 @@ To fix this issue:
 
 .. code-block:: winbatch
 
-   X:\windows\system32>Bcdboot C:\Windows /s Z: \f UEFI
+   X:\windows\system32>Bcdboot C:\Windows /s Z: /f UEFI
    Boot files successfully created.
 
 9. Enter `exit` to close the command prompt
