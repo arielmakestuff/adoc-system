@@ -2,12 +2,12 @@
 GnuPG
 #####
 
-=============
+*************
 Configuration
-=============
+*************
 
 Directory location
-------------------
+==================
 
 ``$GNUPGHOME`` is used by GnuPG to point to the directory where its
 configuration files are stored. By default ``$GNUPGHOME`` is not set and your
@@ -21,7 +21,7 @@ To change the default location, either run gpg this way::
 or set the ``GNUPGHOME`` environment variable.
 
 Configuration files
--------------------
+===================
 
 The default configuration files are ~/.gnupg/gpg.conf and ~/.gnupg/dirmngr.conf.
 
@@ -37,12 +37,12 @@ but simply the name of the option and required arguments. You will find
 skeleton files in /usr/share/gnupg. These files are copied to ~/.gnupg the
 first time gpg is run if they do not exist there.
 
-=====
+*****
 Setup
-=====
+*****
 
 Create master key pair
-----------------------
+======================
 
 .. code:: bash
 
@@ -69,3 +69,43 @@ people will want:
   well-defined, it has limited value for identification.
 
 * a secure passphrase.
+
+Secure master key
+=================
+
+Backup existing configuration
+-----------------------------
+
+Make backups of your existing GnuPG files ($HOME/.gnupg). Keep them safe. If
+something goes wrong during the following steps, you may need this to return
+to a known good place.
+
+::
+
+    $ umask 077; tar -cf $HOME/gnupg-backup.tar -C $HOME .gnupg
+
+(note: umask 077 will result in restrictive permissions for the backup.)
+
+Create a new subkey for signing
+-------------------------------
+
+* Find your key ID::
+
+      $ gpg --list-keys yourname
+      $ gpg --edit-key YOURMASTERKEYID
+
+* At the gpg> prompt: addkey
+
+* This asks for your passphrase, type it in.
+
+* Choose the "RSA (sign only)" key type.
+
+* It would be wise to choose 4096 (or 2048) bit key size.
+
+* Choose an expiry date (you can rotate your subkeys more frequently than the
+  master keys, or keep them for the life of the master key, with no expiry).
+
+* GnuPG will (eventually) create a key, but you may have to wait for it to get
+  enough entropy to do so.
+
+* Save the key: save
