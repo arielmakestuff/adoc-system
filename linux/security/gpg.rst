@@ -109,3 +109,40 @@ Create a new subkey for signing
   enough entropy to do so.
 
 * Save the key: save
+
+You can repeat this, and create an "RSA (encrypt only)" subkey as well, if you
+like or if you need to. As mentioned above, keep in mind that the default
+option when initially creating a new keypair is to create an encryption
+subkey, so you probably have one already.
+
+Backup current configuration
+----------------------------
+
+Backup the current configuration and store it some place safe::
+
+    $ umask 077; tar -cf $HOME/gnupg-private.tar -C $HOME .gnupg
+
+Remove private master key
+--------------------------
+
+.. note::
+
+   The following requires gnupg version 2.1+
+
+Delete the file ``$HOME/.gnupg/private-keys-v1.d/KEYGRIP.key`` where KEYGRIP
+is the "keygrip" of the master key which can be found by running::
+
+    $ gpg --with-keygrip --list-key YOURMASTERKEYID
+
+(The private part of each key pair has a keygrip, hence this command lists one
+keygrip for the master key and one for each subkey.) Note however that if the
+keyring has just been migrated to the new format, then the now obsolete
+``$HOME/.gnupg/secring.gpg`` file might still contain the private master key:
+thus be sure to delete that file too if it is not empty.
+
+Verify that ``gpg -K`` shows a ``sec#`` instead of just sec for your private key. That
+means the secret key is not really there. See the also the presence of a
+dummy OpenPGP packet in the output of::
+
+    $ gpg --export-secret-keys YOURMASTERKEYID | gpg --list-packets.
+
