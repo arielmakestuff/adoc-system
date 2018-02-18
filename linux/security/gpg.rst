@@ -88,6 +88,7 @@ to a known good place.
 
 Alternatively, can use a backup tool such as `borgbackup`_::
 
+    $ mkdir -p $HOME/.local/share/gnupg/backup
     $ borg init -e repokey $HOME/.local/share/gnupg/backup
     $ borg create $HOME/.local/share/gnupg/backup::gnupg-0 ~/.gnupg
 
@@ -128,6 +129,12 @@ Backup current configuration
 Backup the current configuration and store it some place safe::
 
     $ umask 077; tar -cf $HOME/gnupg-private.tar -C $HOME .gnupg
+
+Alternatively using borg backup::
+
+    $ mkdir -p $HOME/.local/share/gnupg/full
+    $ borg init -e repokey $HOME/.local/share/gnupg/full
+    $ borg create $HOME/.local/share/gnupg/full::gnupg-0 ~/.gnupg
 
 Remove private master key
 --------------------------
@@ -179,3 +186,11 @@ Alternatively::
     $ gpg --homedir /path/to/.gnupg -K
 
 The latter command should now list your private key with ``sec`` and not ``sec#``.
+
+Sending keys to a keyserver
+===========================
+
+::
+
+    $ gpg send-keys KEYID
+
