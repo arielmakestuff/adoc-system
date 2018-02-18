@@ -86,6 +86,13 @@ to a known good place.
 
 (note: umask 077 will result in restrictive permissions for the backup.)
 
+Alternatively, can use a backup tool such as `borgbackup`_::
+
+    $ borg init -e repokey $HOME/.local/share/gnupg/backup
+    $ borg create $HOME/.local/share/gnupg/backup::gnupg-0 ~/.gnupg
+
+.. _borgbackup: https://github.com/borgbackup/borg
+
 Create a new subkey for signing
 -------------------------------
 
