@@ -146,3 +146,29 @@ dummy OpenPGP packet in the output of::
 
     $ gpg --export-secret-keys YOURMASTERKEYID | gpg --list-packets.
 
+Change master key password
+--------------------------
+
+Change the passphrase protecting the subkeys::
+
+    $ gpg --edit-key YOURMASTERKEYID passwd
+
+This way if your everyday passphrase is compromised, the private master key
+will remain safe from someone with access to the backup: the private key
+material on the backup, including the private master key, are protected by the
+old passphrase.
+
+Using the master key
+====================
+
+When you need to use the master keys, use the ``.gnupg`` stored in the
+``gnupg-distribute.tar`` backup, and set the GNUPGHOME environment variable::
+
+    $ export GNUPGHOME=/path/to/.gnupg
+    $ gpg -K
+
+Alternatively::
+
+    $ gpg --homedir /path/to/.gnupg -K
+
+The latter command should now list your private key with ``sec`` and not ``sec#``.
